@@ -4,13 +4,12 @@ import com.dpd.backendtool.dto.CustomerDto;
 import com.dpd.backendtool.entity.Customer;
 import com.dpd.backendtool.service.CustomerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("/api/v1/customer")
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class CustomerController {
 
