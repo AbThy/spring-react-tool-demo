@@ -1,0 +1,1 @@
+ALTER TABLE public.phone_number DROP COLUMN country_code;
