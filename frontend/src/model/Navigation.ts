@@ -1,1 +1,1 @@
-export type appScreen = "/home" | "/add-customer" | "/customer-table";
+export type AppScreen = "/" | "/add-customer" | "/customer-table";

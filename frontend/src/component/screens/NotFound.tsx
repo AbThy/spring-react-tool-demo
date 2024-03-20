@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import SideNav from "component/input/SideNav";
+import { ScreenContainer } from "const/styles";
 
 const NotFound = () => {
   return (
@@ -9,10 +9,3 @@ const NotFound = () => {
   );
 };
 export default NotFound;
-
-const ScreenContainer = styled.div`
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-`;

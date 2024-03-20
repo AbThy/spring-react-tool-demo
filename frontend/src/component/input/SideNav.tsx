@@ -1,13 +1,13 @@
-import { appScreen } from "model/Navigation";
+import { AppScreen } from "model/Navigation";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 const SideNav = () => {
   const navigate = useNavigate();
 
-  const navigateToScreen = (root: appScreen) => navigate(root);
+  const navigateToScreen = (root: AppScreen) => navigate(root);
 
-  const NavButton = ({ title, root }: { title: string; root: appScreen }) => {
+  const NavButton = ({ title, root }: { title: string; root: AppScreen }) => {
     return (
       <ButtonContainer onClick={() => navigateToScreen(root)}>
         <p>{title}</p>
@@ -17,7 +17,7 @@ const SideNav = () => {
 
   return (
     <Container>
-      <NavButton title="Home" root="/home" />
+      <NavButton title="Home" root="/" />
       <NavButton title="Add customer" root="/add-customer" />
       <NavButton title="Customers" root="/customer-table" />
     </Container>
@@ -31,6 +31,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: "center";
   width: 10vw;
+  min-width: 100px;
   margin-right: 5vw;
   padding: 1vh 0;
   background-color: #fff6f6;
