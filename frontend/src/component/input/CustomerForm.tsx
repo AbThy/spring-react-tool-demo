@@ -6,6 +6,9 @@ import { initialAddress, initialCustomerState } from "const/initialStates";
 import AddressForm from "./AddressForm";
 import { FormRow, TextButton } from "const/styles";
 import CustomPhoneInput from "./CustomPhoneInput";
+import { isEmailValid, isPhoneNumberValid } from "helper/validators";
+import { saveCustomer } from "api/customer";
+import { PhoneNumber } from "react-phone-number-input";
 
 const CustomerForm = () => {
   const [formData, setFormData] =
@@ -21,14 +24,60 @@ const CustomerForm = () => {
     }));
   };
 
+  const areFieldsValid = (): boolean => {
+    if (
+      addresses?.length === 1 &&
+      addresses?.[0]?.postalCode === initialAddress?.postalCode
+    ) {
+      alert("Please provide a valid address!");
+      return false;
+    }
+
+    if (phoneNumbers?.length === 1 && phoneNumbers?.[0] === "") {
+      alert("Please provide a phone number!");
+      return false;
+    }
+
+    phoneNumbers
+      ?.filter((num) => num !== "")
+      ?.map((num) => {
+        if (!isPhoneNumberValid(num)) {
+          alert(`The phone number ${num} is invalid!`);
+          return false;
+        }
+      });
+
+    if (!isEmailValid(formData?.email ?? "")) {
+      alert(`The email provided ${formData?.email} is invalid!`);
+      return false;
+    }
+
+    return true;
+  };
+
   /**
    * Validates and send the customer
    */
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    //TODO: validate, send
-    console.log(formData);
+    if (!areFieldsValid()) {
+      return;
+    }
+
+    const customer = {
+      ...formData,
+      phoneNumbers: phoneNumbers
+        ?.filter((num) => num !== "")
+        ?.map((num) => {
+          return { number: num };
+        }),
+      addresses: addresses?.filter(
+        (address) => address?.postalCode !== initialAddress?.postalCode
+      ),
+    };
+    const saved = await saveCustomer(customer as CustomerData);
+    console.log("SAVED:", saved);
 
     setFormData(initialCustomerState);
     setPhoneNumbers([""]);
@@ -113,6 +162,18 @@ const CustomerForm = () => {
                 value={formData.name}
                 onChange={handleBasicDetailChange}
                 placeholder="John Doe"
+                required
+              />
+            </FormRow>
+            <FormRow>
+              <Label htmlFor="email">email:</Label>
+              <FormInput
+                type="text"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleBasicDetailChange}
+                placeholder="johndoe42@hogwarts.com"
                 required
               />
             </FormRow>

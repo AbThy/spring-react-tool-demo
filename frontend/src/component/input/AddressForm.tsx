@@ -14,7 +14,6 @@ const AddressForm = ({
   updateAddress: (index: number, address: Address) => void;
   removeAddress: (index: number) => void;
 }) => {
-  //TODO: memoize
   const [internalAddress, setInternalAddress] = useState<Address>(address);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,8 +24,12 @@ const AddressForm = ({
     }));
   };
 
+  const handleSubmit = () => {
+    updateAddress(index, internalAddress);
+  };
+
   return (
-    <div style={{ border: "1px solid black", padding: "10px" }}>
+    <form style={{ border: "1px solid black", padding: "10px" }}>
       <FormRow>
         <label style={{ marginRight: "10px" }}>Postal code</label>
         <input
@@ -91,12 +94,10 @@ const AddressForm = ({
         />
       </FormRow>
       <ButtonControls>
-        <button onClick={() => updateAddress(index, internalAddress)}>
-          Save address
-        </button>
+        <button onClick={() => handleSubmit()}>Save address</button>
         <button onClick={() => removeAddress(index)}>Remove address</button>
       </ButtonControls>
-    </div>
+    </form>
   );
 };
 export default AddressForm;

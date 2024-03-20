@@ -2,6 +2,7 @@ import { FormRow, TextButton } from "const/styles";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { useState } from "react";
+import { FormInput } from "./CustomerForm";
 
 const CustomPhoneInput = ({
   phoneNumbers,
@@ -27,6 +28,7 @@ const CustomPhoneInput = ({
         value={internalNumber}
         onChange={(e) => setInternalNumber(e ?? "")}
         onBlur={() => setPhoneNumber(internalNumber, index)}
+        inputComponent={FormInput}
       />
       {index === phoneNumbers?.length - 1 ? (
         <TextButton onClick={() => addPhoneNumber()}>+</TextButton>

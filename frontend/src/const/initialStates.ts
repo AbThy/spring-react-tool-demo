@@ -2,6 +2,7 @@ import { Address, CustomerData } from "model/Customer";
 
 export const initialCustomerState: Partial<CustomerData> = {
   name: "",
+  email: "",
   dateOfBirth: "",
   placeOfBirth: "",
   taj: "",
