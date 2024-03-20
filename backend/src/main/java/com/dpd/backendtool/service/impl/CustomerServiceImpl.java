@@ -46,6 +46,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .taj(dto.getTaj())
                 .addresses(Collections.emptySet())
                 .phoneNumbers(Collections.emptySet())
+                .email(dto.getEmail())
                 .build();
 
         Customer saved = customerRepository.save(customer);

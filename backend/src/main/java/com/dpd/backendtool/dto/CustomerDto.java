@@ -11,6 +11,7 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 public class CustomerDto {
+    private String email;
     private String name;
     private Date dateOfBirth;
     private String placeOfBirth;
