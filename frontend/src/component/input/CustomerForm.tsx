@@ -1,16 +1,10 @@
 import React, { useState } from "react";
-import { CustomerData } from "model/Customer";
 
-const initialFormData: CustomerData = {
-  name: "",
-  dateOfBirth: "",
-  placeOfBirth: "",
-  taj: "",
-  taxId: "",
-};
+import { CustomerData } from "model/Customer";
+import { initialCustomerState } from "const/initialStates";
 
 const CustomerForm: React.FC = () => {
-  const [formData, setFormData] = useState<CustomerData>(initialFormData);
+  const [formData, setFormData] = useState<CustomerData>(initialCustomerState);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -24,7 +18,7 @@ const CustomerForm: React.FC = () => {
     e.preventDefault();
     console.log(formData); // You can do something with the form data here
     // Reset form after submission
-    setFormData(initialFormData);
+    setFormData(initialCustomerState);
   };
 
   return (
