@@ -20,5 +20,5 @@ public class PhoneNumber {
     private Long id;
 
     private Long customerId;
-    private int number;
+    private String number;
 }
