@@ -32,5 +32,5 @@ public interface CustomerService {
      * @param customerId The customer's id we want to delete
      * @return The id of the deleted customer
      */
-    Long deleteCustomer(Long customerId);
+    Customer deleteCustomer(Long customerId);
 }

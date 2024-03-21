@@ -13,6 +13,7 @@ import java.util.Set;
 public class CustomerDto {
     private String email;
     private String name;
+    private String mother;
     private Date dateOfBirth;
     private String placeOfBirth;
     private String taj;

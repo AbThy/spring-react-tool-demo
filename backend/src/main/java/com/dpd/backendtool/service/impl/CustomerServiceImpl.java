@@ -40,6 +40,7 @@ public class CustomerServiceImpl implements CustomerService {
         //TODO backend validation
         final Customer customer = Customer.builder()
                 .name(dto.getName())
+                .mother(dto.getMother())
                 .dateOfBirth(dto.getDateOfBirth())
                 .placeOfBirth(dto.getPlaceOfBirth())
                 .taxId(dto.getTaxId())
@@ -85,18 +86,27 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     @Transactional
-    public Long deleteCustomer(Long customerId) {
+    public Customer deleteCustomer(Long customerId) {
         Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
         if(optionalCustomer.isEmpty()){
             throw new EntityNotFoundException("Customer not found!");
         }
 
-        final Set<Address> addressSet = optionalCustomer.get().getAddresses();
-        final Set<PhoneNumber> phoneNumberSet = optionalCustomer.get().getPhoneNumbers();
+        final Customer customer = optionalCustomer.get();
+
+        final Set<Address> addressSet = customer.getAddresses();
+        final Set<PhoneNumber> phoneNumberSet = customer.getPhoneNumbers();
         addressSet.stream().forEach(address -> addressRepository.delete(address));
         phoneNumberSet.stream().forEach(phoneNumber -> phoneNumberRepository.delete(phoneNumber));
-        customerRepository.deleteById(customerId);
 
-        return customerId;
+        // All data are GDPR deletable
+        customer.setMother("deleted");
+        customer.setEmail("deleted");
+        customer.setName("deleted");
+        customer.setTaxId("deleted");
+        customer.setTaj("deleted");
+        customerRepository.save(customer);
+
+        return Customer;
     }
 }

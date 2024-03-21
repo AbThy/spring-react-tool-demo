@@ -32,7 +32,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/delete")
-    public Long deleteCustomer(@RequestParam Long customerId) {
+    public Customer deleteCustomer(@RequestParam Long customerId) {
         return customerService.deleteCustomer(customerId);
     }
 }
