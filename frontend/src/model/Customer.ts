@@ -1,6 +1,7 @@
 export type CustomerData = {
   name: string;
   email: string;
+  mother: string;
   dateOfBirth: string;
   placeOfBirth: string;
   taj: string;

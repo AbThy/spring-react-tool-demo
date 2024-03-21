@@ -107,6 +107,6 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setTaj("deleted");
         customerRepository.save(customer);
 
-        return Customer;
+        return customer;
     }
 }

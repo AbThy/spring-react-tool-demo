@@ -8,7 +8,6 @@ import { FormRow, TextButton } from "const/styles";
 import CustomPhoneInput from "./CustomPhoneInput";
 import { isEmailValid, isPhoneNumberValid } from "helper/validators";
 import { saveCustomer } from "api/customer";
-import { PhoneNumber } from "react-phone-number-input";
 
 const CustomerForm = () => {
   const [formData, setFormData] =
@@ -77,7 +76,9 @@ const CustomerForm = () => {
       ),
     };
     const saved = await saveCustomer(customer as CustomerData);
-    console.log("SAVED:", saved);
+    if (saved) {
+      alert("Customer saved!");
+    }
 
     setFormData(initialCustomerState);
     setPhoneNumbers([""]);
@@ -197,6 +198,18 @@ const CustomerForm = () => {
                 value={formData.placeOfBirth}
                 onChange={handleBasicDetailChange}
                 placeholder="Budapest"
+                required
+              />
+            </FormRow>
+            <FormRow>
+              <Label htmlFor="mother">Mother's birthname:</Label>
+              <FormInput
+                type="text"
+                id="mother"
+                name="mother"
+                value={formData.mother}
+                onChange={handleBasicDetailChange}
+                placeholder="Don Joe"
                 required
               />
             </FormRow>
